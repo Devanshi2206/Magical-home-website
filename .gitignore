@@ -1,0 +1,36 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Node modules (future use)
+node_modules/
+
+# Environment files
+.env
+
+# VS Code settings
+.vscode/
+
+# Mac files
+*.swp
+
+# Python (if used later)
+__pycache__/
+*.pyc
+
+# Temporary files
+temp/
+tmp/
+
+# Build files
+dist/
+build/
+
+# IDE files
+.idea/
+
+# Backup files
+*.bak
