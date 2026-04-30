@@ -1,11 +1,11 @@
 🛍️ Magical Home – Handmade Products Website
 📌 Overview
 
-Magical Home ek simple aur interactive e-commerce style website hai jahan users handmade products browse kar sakte hain, cart me add kar sakte hain, aur basic checkout experience le sakte hain. Website clean UI, product filtering, wishlist aur account creation jaise features provide karti hai.
+Magical Home is a responsive e-commerce-style website designed to showcase and sell handmade products through an interactive and user-friendly interface. The platform allows users to browse a variety of products such as soaps, candles, pottery items, sweets, and clothing, each displayed with relevant images and details.
 
 🎯 Objective
 
-Is project ka main goal hai ek user-friendly handmade products store banana jisme basic e-commerce functionalities ho, jaise:
+The main objective of this project is to develop a simple and efficient online store that demonstrates core e-commerce functionalities, including product browsing, cart management, and user interaction without requiring a backend system.
 
 Product listing
 Cart management
@@ -34,26 +34,27 @@ magical-home/
 Method 1 (Simple)
 Download index.html
 Double-click file
-Website browser me open ho jayegi
+Website open in browser 
 Method 2 (VS Code Recommended)
 1. Open VS Code
 2. Open folder
 3. Right click index.html
 4. Click "Open with Live Server"
 📸 Screenshots
-Home Page
+Home Page <img width="1908" height="1027" alt="image" src="https://github.com/user-attachments/assets/32ac51c6-13eb-4742-b8bc-fe2df9ab7b51" />
 
-Products Section
+Products Section <img width="1918" height="1022" alt="image" src="https://github.com/user-attachments/assets/2865019e-7ce3-4681-85df-af1a722f0bd7" />
 
-Cart Section
+Cart Section <img width="1912" height="1036" alt="image" src="https://github.com/user-attachments/assets/cdf3c7a6-679a-489d-bf28-716a429b004b" />
+
 
 ⚙️ Working
-User products browse karta hai
-Product select karke cart me add karta hai
-Quantity adjust kar sakta hai
-Total automatically calculate hota hai
-Checkout pe order summary show hoti hai
-User account create kar sakta hai
+Users browse available products
+Products can be added to the cart
+Quantity can be increased or decreased
+Total price is calculated automatically
+Users can proceed to checkout
+Account details can be created and stored locally
 🔮 Future Improvements
 🔐 Login & authentication system
 🗄️ Database integration (MongoDB / Firebase)
