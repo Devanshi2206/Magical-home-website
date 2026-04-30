@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Magical Home | Handmade Products Store</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+html{scroll-behavior:smooth}
+body{background:#fff7fb;color:#2d2530}
+.topbar{background:#3b1d48;color:white;text-align:center;padding:10px;font-weight:bold}
+.navbar{position:sticky;top:0;z-index:10;background:white;display:flex;justify-content:space-between;align-items:center;padding:15px 7%;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.logo{font-size:25px;font-weight:900;color:#7b2f8f}
+.navlinks{display:flex;gap:18px;align-items:center}
+.navlinks a{text-decoration:none;color:#333;font-weight:bold}
+.navlinks a:hover{color:#7b2f8f}
+.cart-pill{background:#7b2f8f;color:white!important;padding:8px 13px;border-radius:20px}
+
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:45px 7%;background:linear-gradient(135deg,#fff0fb,#ecfff2)}
+.hero h1{font-size:46px;color:#3b1d48;margin-bottom:15px}
+.hero p{font-size:18px;line-height:1.6;color:#5d4a61;margin-bottom:20px}
+.hero img{width:100%;height:340px;object-fit:cover;border-radius:25px;box-shadow:0 15px 30px rgba(0,0,0,.18)}
+.btn{border:0;background:#7b2f8f;color:white;padding:12px 18px;border-radius:10px;font-weight:bold;cursor:pointer}
+.btn:hover{background:#5c1f6e}
+.btn.secondary{background:#f1def7;color:#5c1f6e}
+.section{padding:42px 7%}
+.section-title{text-align:center;font-size:34px;color:#3b1d48;margin-bottom:8px}
+.section-sub{text-align:center;color:#6b5b70;margin-bottom:25px}
+.controls{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:25px}
+.controls input,.controls select{padding:12px;border:1px solid #ddd;border-radius:10px;min-width:230px}
+
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.card{background:white;border-radius:18px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,.08);border:1px solid #f1dff4;display:flex;flex-direction:column}
+.card img{width:100%;height:210px;object-fit:cover;background:#f4eef7}
+.card-body{padding:16px;display:flex;flex-direction:column;gap:9px;flex:1}
+.category{font-size:12px;color:#8b2aa3;font-weight:bold;text-transform:uppercase}
+.card h3{font-size:20px;color:#2f2334}
+.desc{font-size:14px;color:#6c5c70;line-height:1.4;min-height:45px}
+.price{font-size:21px;color:#2f7d3c;font-weight:900}
+.actions{display:grid;grid-template-columns:auto 1fr auto;gap:8px;margin-top:auto;align-items:center}
+.qtybox{display:flex;border:1px solid #ead7ee;border-radius:10px;overflow:hidden}
+.qtybox button{border:0;background:#f6eaf9;padding:9px 11px;cursor:pointer;font-size:17px}
+.qtybox span{padding:9px 12px;font-weight:bold}
+.wish{background:#fff0f5;color:#ba2568}
+
+.cart-section{display:grid;grid-template-columns:1fr 360px;gap:22px}
+.cart-list,.summary,.form-box{background:white;border-radius:18px;padding:22px;box-shadow:0 10px 24px rgba(0,0,0,.08);border:1px solid #f1dff4}
+.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:12px;align-items:center;border-bottom:1px solid #eee;padding:12px 0}
+.cart-item img{width:70px;height:60px;object-fit:cover;border-radius:8px}
+.remove{background:#ffe7e7;color:#b80000}
+.summary-row{display:flex;justify-content:space-between;margin:12px 0}
+.total{font-size:24px;font-weight:900;color:#2f7d3c}
+.forms{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.form-box input{width:100%;margin:8px 0 14px;padding:12px;border:1px solid #ddd;border-radius:10px}
+.account-card{background:#f7fff8;border:1px solid #cae9d1;border-radius:12px;padding:15px;line-height:1.8}
+.toast{position:fixed;right:22px;bottom:22px;background:#302038;color:white;padding:14px 18px;border-radius:12px;display:none;z-index:999}
+.footer{text-align:center;background:#3b1d48;color:white;padding:24px;margin-top:30px}
+
+@media(max-width:1000px){
+.products{grid-template-columns:repeat(2,1fr)}
+.hero,.cart-section,.forms{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+.navbar{flex-direction:column;gap:12px}
+.navlinks{flex-wrap:wrap;justify-content:center}
+.hero h1{font-size:34px}
+.products{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">Free delivery on orders above ₹499 | Fresh handmade products for every home</div>
+
+<nav class="navbar">
+  <div class="logo">Magical Home ✨</div>
+  <div class="navlinks">
+    <a href="#home">Home</a>
+    <a href="#products">Products</a>
+    <a href="#cart">Cart</a>
+    <a href="#account">Create Account</a>
+    <a class="cart-pill" href="#cart">🛒 <span id="cartCount">0</span></a>
+  </div>
+</nav>
+
+<section class="hero" id="home">
+  <div>
+    <h1>Natural, handmade products made with care.</h1>
+    <p>Shop handmade soaps, candles, pottery, sweets, paper bags, cotton clothing, herbal oil and kajal from one clean and fully working website.</p>
+    <button class="btn" onclick="document.getElementById('products').scrollIntoView()">Shop Products</button>
+  </div>
+  <img src="https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&w=1000" alt="Handmade products collection">
+</section>
+
+<section class="section" id="products">
+  <h2 class="section-title">Our Products</h2>
+  <p class="section-sub">Product images are matched according to product names.</p>
+
+  <div class="controls">
+    <input id="search" placeholder="Search product..." oninput="renderProducts()">
+    <select id="categoryFilter" onchange="renderProducts()">
+      <option value="all">All Categories</option>
+      <option>Home Care</option>
+      <option>Decor</option>
+      <option>Kitchen</option>
+      <option>Food</option>
+      <option>Fashion</option>
+      <option>Beauty</option>
+    </select>
+  </div>
+
+  <div class="products" id="productGrid"></div>
+</section>
+
+<section class="section" id="cart">
+  <h2 class="section-title">Shopping Cart</h2>
+  <p class="section-sub">Change quantity, remove products, and check total amount.</p>
+
+  <div class="cart-section">
+    <div class="cart-list" id="cartList">
+      <p>Your cart is empty.</p>
+    </div>
+
+    <div class="summary">
+      <h3>Order Summary</h3>
+      <div class="summary-row"><span>Items</span><strong id="summaryItems">0</strong></div>
+      <div class="summary-row"><span>Subtotal</span><strong id="subtotal">₹0.00</strong></div>
+      <div class="summary-row"><span>Delivery</span><strong id="delivery">₹0.00</strong></div>
+      <hr>
+      <div class="summary-row total"><span>Total</span><span id="grandTotal">₹0.00</span></div>
+      <button class="btn" style="width:100%;margin-top:15px" onclick="checkout()">Checkout</button>
+      <button class="btn secondary" style="width:100%;margin-top:10px" onclick="clearCart()">Clear Cart</button>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="account">
+  <h2 class="section-title">Create Account</h2>
+  <p class="section-sub">Create account and your details will appear below.</p>
+
+  <div class="forms">
+    <div class="form-box">
+      <h3>New Account</h3>
+      <form onsubmit="createAccount(event)">
+        <input id="name" placeholder="Full Name" required>
+        <input id="email" type="email" placeholder="Email Address" required>
+        <input id="phone" pattern="[0-9]{10}" placeholder="10 Digit Phone Number" required>
+        <input id="address" placeholder="Delivery Address" required>
+        <button class="btn" type="submit">Create Account</button>
+      </form>
+    </div>
+
+    <div class="form-box">
+      <h3>Your Account Details</h3>
+      <div class="account-card" id="accountInfo">
+        <p>No account created yet.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="footer">© 2026 Magical Home | Handmade Products Store</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  {
+    id:1,
+    name:'Handmade Soap',
+    category:'Home Care',
+    price:50,
+    unit:'1 soap',
+    desc:'Organic handmade soap made with natural ingredients.',
+    img:'https://images.pexels.com/photos/6621462/pexels-photo-6621462.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:2,
+    name:'Scented Candles Set',
+    category:'Decor',
+    price:80.50,
+    unit:'2 candles',
+    desc:'Aromatic scented candles for a calm and fresh room.',
+    img:'https://images.pexels.com/photos/4202325/pexels-photo-4202325.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:3,
+    name:'Handcrafted Wooden Bowl',
+    category:'Kitchen',
+    price:170,
+    unit:'2 bowls',
+    desc:'Beautiful wooden bowls for serving and home decor.',
+    img:'https://images.pexels.com/photos/6646071/pexels-photo-6646071.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:4,
+    name:'Cow Dung Cake',
+    category:'Home Care',
+    price:100,
+    unit:'10 pieces',
+    desc:'Traditional dried cow dung cakes for pooja use.',
+    img:'https://upload.wikimedia.org/wikipedia/commons/5/59/Cow_dung_cakes.jpg'
+  },
+  {
+    id:5,
+    name:'Paper Bags',
+    category:'Home Care',
+    price:19.99,
+    unit:'2 bags',
+    desc:'Eco-friendly recycled paper bags for daily use.',
+    img:'https://images.pexels.com/photos/7262898/pexels-photo-7262898.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:6,
+    name:'Handmade Pottery Mugs',
+    category:'Kitchen',
+    price:185.99,
+    unit:'2 mugs',
+    desc:'Handmade pottery mugs for tea, coffee and gifting.',
+    img:'https://images.pexels.com/photos/1207918/pexels-photo-1207918.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:7,
+    name:'Mithai Box',
+    category:'Food',
+    price:200,
+    unit:'8 pieces',
+    desc:'Assorted Indian sweets for festivals and celebrations.',
+    img:'https://images.pexels.com/photos/14705180/pexels-photo-14705180.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:8,
+    name:'Gujiya',
+    category:'Food',
+    price:55,
+    unit:'6 pieces',
+    desc:'Traditional Holi special gujiya with sweet filling.',
+    img:'https://upload.wikimedia.org/wikipedia/commons/6/6d/Gujia_%28Indian_Sweet%29.jpg'
+  },
+  {
+    id:9,
+    name:'Cotton Kurti',
+    category:'Fashion',
+    price:350.50,
+    unit:'1 kurti',
+    desc:'Comfortable cotton kurti available in S, M and L sizes.',
+    img:'https://images.pexels.com/photos/2531734/pexels-photo-2531734.jpeg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:10,
+    name:'Herbal Cooking Oil',
+    category:'Kitchen',
+    price:290.79,
+    unit:'1 bottle',
+    desc:'Natural cooking oil for healthier homemade meals.',
+    img:'https://images.pexels.com/photos/33783/olive-oil-salad-dressing-cooking-olive.jpg?auto=compress&cs=tinysrgb&w=800'
+  },
+  {
+    id:11,
+    name:'Handmade Kajal',
+    category:'Beauty',
+    price:90,
+    unit:'1 box',
+    desc:'Kajal inspired eye cosmetic for daily use.',
+    img:'https://images.pexels.com/photos/2533266/pexels-photo-2533266.jpeg?auto=compress&cs=tinysrgb&w=800'
+  }
+];
+
+let cart = {};
+let qtyState = {};
+let wishlist = new Set();
+
+function money(n){
+  return '₹' + Number(n).toFixed(2);
+}
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 1800);
+}
+
+function imageError(img, name){
+  img.onerror = null;
+  img.src = "https://via.placeholder.com/800x500/f3e4f8/5c1f6e?text=" + encodeURIComponent(name);
+}
+
+function renderProducts(){
+  const q = document.getElementById('search').value.toLowerCase();
+  const c = document.getElementById('categoryFilter').value;
+  const grid = document.getElementById('productGrid');
+
+  grid.innerHTML = '';
+
+  products
+    .filter(p => (c === 'all' || p.category === c) && p.name.toLowerCase().includes(q))
+    .forEach(p => {
+      qtyState[p.id] = qtyState[p.id] || 1;
+
+      grid.innerHTML += `
+        <div class="card">
+          <img src="${p.img}" alt="${p.name}" onerror="imageError(this,'${p.name}')">
+          <div class="card-body">
+            <div class="category">${p.category}</div>
+            <h3>${p.name}</h3>
+            <p class="desc">${p.desc}<br><strong>Pack:</strong> ${p.unit}</p>
+            <div class="price">${money(p.price)}</div>
+
+            <div class="actions">
+              <div class="qtybox">
+                <button onclick="changeQty(${p.id},-1)">−</button>
+                <span id="qty-${p.id}">${qtyState[p.id]}</span>
+                <button onclick="changeQty(${p.id},1)">+</button>
+              </div>
+
+              <button class="btn" onclick="addToCart(${p.id})">Add</button>
+              <button class="btn wish" onclick="toggleWish(${p.id})">${wishlist.has(p.id) ? '♥' : '♡'}</button>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+}
+
+function changeQty(id, delta){
+  qtyState[id] = Math.max(1, (qtyState[id] || 1) + delta);
+  document.getElementById('qty-' + id).textContent = qtyState[id];
+}
+
+function addToCart(id){
+  cart[id] = (cart[id] || 0) + (qtyState[id] || 1);
+  renderCart();
+  showToast('Product added to cart');
+}
+
+function toggleWish(id){
+  wishlist.has(id) ? wishlist.delete(id) : wishlist.add(id);
+  renderProducts();
+  showToast(wishlist.has(id) ? 'Added to wishlist' : 'Removed from wishlist');
+}
+
+function renderCart(){
+  const list = document.getElementById('cartList');
+  const ids = Object.keys(cart);
+
+  if(!ids.length){
+    list.innerHTML = '<p>Your cart is empty.</p>';
+  } else {
+    list.innerHTML = ids.map(id => {
+      const p = products.find(x => x.id == id);
+      return `
+        <div class="cart-item">
+          <img src="${p.img}" alt="${p.name}" onerror="imageError(this,'${p.name}')">
+          <div>
+            <strong>${p.name}</strong><br>
+            <small>${money(p.price)} × ${cart[id]} = ${money(p.price * cart[id])}</small>
+          </div>
+          <button class="btn remove" onclick="removeItem(${id})">Remove</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const items = ids.reduce((s,id) => s + cart[id], 0);
+  const sub = ids.reduce((s,id) => {
+    const p = products.find(x => x.id == id);
+    return s + p.price * cart[id];
+  }, 0);
+
+  const delivery = sub > 0 && sub < 499 ? 40 : 0;
+
+  document.getElementById('cartCount').textContent = items;
+  document.getElementById('summaryItems').textContent = items;
+  document.getElementById('subtotal').textContent = money(sub);
+  document.getElementById('delivery').textContent = money(delivery);
+  document.getElementById('grandTotal').textContent = money(sub + delivery);
+}
+
+function removeItem(id){
+  delete cart[id];
+  renderCart();
+  showToast('Product removed');
+}
+
+function clearCart(){
+  cart = {};
+  renderCart();
+  showToast('Cart cleared');
+}
+
+function checkout(){
+  const total = document.getElementById('grandTotal').textContent;
+
+  if(Object.keys(cart).length === 0){
+    alert('Your cart is empty.');
+    return;
+  }
+
+  alert('Order placed successfully!\\nTotal Amount: ' + total + '\\nThank you for shopping with Magical Home.');
+  clearCart();
+}
+
+function createAccount(e){
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    address: document.getElementById('address').value
+  };
+
+  localStorage.setItem('magicalHomeUser', JSON.stringify(data));
+  showAccount();
+  showToast('Account created successfully');
+  document.getElementById('account').scrollIntoView();
+  e.target.reset();
+}
+
+function showAccount(){
+  const saved = localStorage.getItem('magicalHomeUser');
+  const box = document.getElementById('accountInfo');
+
+  if(!saved){
+    box.innerHTML = '<p>No account created yet.</p>';
+    return;
+  }
+
+  const u = JSON.parse(saved);
+
+  box.innerHTML = `
+    <p><strong>Name:</strong> ${u.name}</p>
+    <p><strong>Email:</strong> ${u.email}</p>
+    <p><strong>Phone:</strong> ${u.phone}</p>
+    <p><strong>Address:</strong> ${u.address}</p>
+    <button class="btn secondary" onclick="localStorage.removeItem('magicalHomeUser');showAccount()">Logout / Clear Account</button>
+  `;
+}
+
+renderProducts();
+renderCart();
+showAccount();
+</script>
+
+</body>
+</html>
